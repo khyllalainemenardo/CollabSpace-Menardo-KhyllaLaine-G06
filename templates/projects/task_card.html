@@ -1,0 +1,12 @@
+<div class="card">
+  <strong>{{ task.title }}</strong>
+  {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+  <small>Assigned to: {{ task.assigned_to.username|default:"Unassigned" }}</small><br>
+  <small>Due: {{ task.due_date|default:"None" }}</small><br>
+  {% if project.owner == user or task.assigned_to == user %}
+    <a href="{% url 'projects:task_update' task.pk %}">Edit</a>
+  {% endif %}
+  {% if project.owner == user %}
+    | <a href="{% url 'projects:task_delete' task.pk %}">Delete</a>
+  {% endif %}
+</div>
