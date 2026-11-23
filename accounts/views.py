@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from projects.models import Project, Task
 from .decorators import role_required
 from .forms import RegisterForm, ProfileForm
+from django.db.models import Count, Q
 
 
 def register(request):
