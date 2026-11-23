@@ -2,6 +2,7 @@
 {% block content %}
 <h2>Member Dashboard</h2>
 <p>Welcome, {{ user.first_name|default:user.username }}!</p>
+
 <h3>My Tasks</h3>
 <ul>
   {% for task in tasks %}
@@ -9,6 +10,16 @@
         <a href="{% url 'projects:project_detail' task.project.pk %}">{{ task.project.name }}</a></li>
   {% empty %}
     <li>No tasks assigned to you.</li>
+  {% endfor %}
+</ul>
+
+<h3>Projects I'm In</h3>
+<ul>
+  {% for project in projects %}
+    <li><a href="{% url 'projects:project_detail' project.pk %}">{{ project.name }}</a>
+        (Leader: {{ project.owner.username }})</li>
+  {% empty %}
+    <li>You haven't been added to any project yet.</li>
   {% endfor %}
 </ul>
 {% endblock %}
