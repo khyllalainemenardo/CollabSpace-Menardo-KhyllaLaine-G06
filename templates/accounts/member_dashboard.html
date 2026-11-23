@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Member Dashboard</h2>
+<p>Welcome, {{ user.first_name|default:user.username }}!</p>
+<h3>My Tasks</h3>
+<ul>
+  {% for task in tasks %}
+    <li>{{ task.title }} ({{ task.get_status_display }}) in
+        <a href="{% url 'projects:project_detail' task.project.pk %}">{{ task.project.name }}</a></li>
+  {% empty %}
+    <li>No tasks assigned to you.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

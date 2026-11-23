@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Team Leader Dashboard</h2>
+<p>Welcome, {{ user.first_name|default:user.username }}!</p>
+<p><a href="{% url 'projects:project_create' %}">+ Create Project</a></p>
+<h3>My Projects</h3>
+<ul>
+  {% for project in projects %}
+    <li><a href="{% url 'projects:project_detail' project.pk %}">{{ project.name }}</a>
+        ({{ project.tasks.count }} tasks)</li>
+  {% empty %}
+    <li>No projects yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
